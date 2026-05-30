@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DISRUPT — Social Media UI Kit</title>
+  <meta name="description" content="UI Kit completo para Social Media de la agencia at DISRUPT — Templates, componentes y especificaciones.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../colors_and_type.css">
+  <style>
+    /* ── RESET & BASE ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans);
+      background: #080808;
+      color: white;
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(8,8,8,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 0 var(--space-8);
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    .nav-logo {
+      display: flex; align-items: baseline; gap: 5px;
+      text-decoration: none; color: inherit;
+    }
+    .nav-logo .at  { font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.4); }
+    .nav-logo .brand { font-size: 20px; font-weight: 900; letter-spacing: -0.03em; }
+    .nav-badge { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+    .nav-tabs { display: flex; gap: 4px; }
+    .nav-tab {
+      padding: 6px 14px; border-radius: 999px; font-size: 12px; font-weight: 500;
+      color: rgba(255,255,255,0.45); cursor: pointer; transition: all 200ms;
+      border: none; background: transparent;
+    }
+    .nav-tab:hover { color: white; background: rgba(255,255,255,0.07); }
+    .nav-tab.active { color: white; background: rgba(255,255,255,0.12); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: var(--space-16) var(--space-8) var(--space-12);
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 85% 20%, rgba(43,111,212,0.25) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 35% at 15% 80%, rgba(155,120,232,0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue-300); margin-bottom: var(--space-4); }
+    .hero-title { font-size: clamp(36px, 5vw, 72px); font-weight: 900; letter-spacing: -0.04em; line-height: 1.0; margin-bottom: var(--space-6); }
+    .hero-title span { color: var(--blue-300); }
+    .hero-desc { font-size: 17px; color: rgba(255,255,255,0.5); max-width: 560px; line-height: 1.65; margin-bottom: var(--space-8); }
+    .hero-stats { display: flex; gap: var(--space-8); }
+    .stat-val { font-size: 28px; font-weight: 800; letter-spacing: -0.03em; color: white; }
+    .stat-lbl { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 2px; }
+
+    /* ── SECTION WRAPPER ── */
+    .section-wrap { padding: var(--space-12) var(--space-8); border-top: 1px solid rgba(255,255,255,0.05); }
+    .section-head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: var(--space-8); }
+    .section-title { font-size: 24px; font-weight: 800; letter-spacing: -0.03em; }
+    .section-count { font-size: 12px; color: rgba(255,255,255,0.3); }
+
+    /* ── POST TEMPLATES GRID ── */
+    .templates-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: var(--space-5); }
+    .template-card {
+      border-radius: var(--radius-xl); overflow: hidden; position: relative;
+      cursor: pointer; transition: transform 200ms var(--ease-out), box-shadow 200ms var(--ease-out);
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+    .template-card:hover { transform: translateY(-4px) scale(1.01); box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+    .template-inner { aspect-ratio: 4/5; position: relative; overflow: hidden; }
+    .template-inner img { width: 100%; height: 100%; object-fit: cover; }
+    .template-meta {
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.04);
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .template-name { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.75); margin-bottom: 3px; }
+    .template-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tag {
+      font-size: 9px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 2px 7px; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.4);
+    }
+    .tag.blue   { border-color: rgba(123,191,247,0.3); color: var(--blue-300); }
+    .tag.pink   { border-color: rgba(247,168,168,0.3); color: var(--pink-300); }
+    .tag.violet { border-color: rgba(196,176,247,0.3); color: var(--purple-300); }
+    .tag.green  { border-color: rgba(133,232,156,0.3); color: var(--green-300); }
+    .tag.dark   { border-color: rgba(255,255,255,0.15); color: rgba(255,255,255,0.5); }
+
+    /* ── LIVE POST BUILDER ── */
+    .builder-wrap {
+      display: grid; grid-template-columns: 1fr 360px; gap: var(--space-8);
+      align-items: start;
+    }
+    .post-canvas-wrap { position: sticky; top: 80px; }
+    .post-canvas {
+      width: 100%; max-width: 400px; aspect-ratio: 4/5;
+      border-radius: var(--radius-xl); overflow: hidden; position: relative;
+      transition: all 400ms var(--ease-inout);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+    }
+    .post-bg { position: absolute; inset: 0; transition: all 400ms; }
+    .post-blob-tl {
+      position: absolute; width: 55%; height: 50%; top: -10%; left: -10%;
+      border-radius: 50%;
+      filter: blur(40px); opacity: 0.7; transition: all 400ms;
+    }
+    .post-blob-br {
+      position: absolute; width: 50%; height: 45%; bottom: -5%; right: -5%;
+      border-radius: 50%;
+      filter: blur(35px); opacity: 0.6; transition: all 400ms;
+    }
+    .post-header-bar {
+      position: relative; z-index: 10;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 22px 12px;
+      border-bottom: 1px solid rgba(0,0,0,0.12);
+    }
+    .post-header-bar.dark { border-bottom-color: rgba(255,255,255,0.15); }
+    .post-header-label { font-size: 10px; font-weight: 400; }
+    .post-header-logo  { font-size: 13px; font-weight: 900; letter-spacing: -0.02em; }
+    .post-header-logo .at { font-size: 9px; font-weight: 500; margin-right: 2px; }
+    .post-content {
+      position: relative; z-index: 10;
+      padding: 20px 22px;
+      flex: 1; display: flex; flex-direction: column; justify-content: center;
+      height: calc(100% - 60px);
+    }
+    .post-glass-frame {
+      border-radius: 24px;
+      padding: 20px;
+      margin-bottom: 16px;
+      flex: 1;
+      transition: all 400ms;
+    }
+    .post-tagline {
+      border-radius: 16px;
+      padding: 14px 18px;
+      font-size: 13px;
+      line-height: 1.55;
+      transition: all 400ms;
+    }
+    .post-headline {
+      font-size: clamp(18px, 4vw, 28px);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      padding: 0 22px;
+      margin-top: auto;
+      margin-bottom: 18px;
+      position: relative; z-index: 10;
+      transition: color 300ms;
+    }
+
+    /* Controls Panel */
+    .controls { display: flex; flex-direction: column; gap: var(--space-5); }
+    .control-group { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: var(--radius-lg); padding: var(--space-5); }
+    .ctrl-label { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: var(--space-4); }
+    .ctrl-row { display: flex; gap: 8px; flex-wrap: wrap; }
+    .ctrl-btn {
+      padding: 7px 14px; border-radius: 999px; font-size: 12px; font-weight: 500;
+      border: 1px solid rgba(255,255,255,0.12); background: transparent; color: rgba(255,255,255,0.5);
+      cursor: pointer; transition: all 150ms; font-family: var(--font-sans);
+    }
+    .ctrl-btn:hover { border-color: rgba(255,255,255,0.25); color: white; }
+    .ctrl-btn.active { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.25); color: white; }
+    .ctrl-btn.blue-active   { background: rgba(43,111,212,0.2); border-color: var(--blue-400); color: var(--blue-300); }
+    .ctrl-btn.pink-active   { background: rgba(232,104,122,0.2); border-color: var(--pink-300); color: var(--pink-300); }
+    .ctrl-btn.violet-active { background: rgba(155,120,232,0.2); border-color: var(--purple-300); color: var(--purple-300); }
+    .ctrl-btn.green-active  { background: rgba(62,201,107,0.2); border-color: var(--green-300); color: var(--green-300); }
+    .ctrl-input {
+      width: 100%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px; padding: 10px 14px; color: white; font-family: var(--font-sans);
+      font-size: 13px; font-weight: 600; resize: none; outline: none;
+      transition: border-color 150ms;
+    }
+    .ctrl-input:focus { border-color: rgba(43,111,212,0.5); }
+    .color-dot {
+      width: 28px; height: 28px; border-radius: 50%; cursor: pointer;
+      border: 2px solid transparent; transition: all 150ms;
+    }
+    .color-dot:hover, .color-dot.selected { border-color: white; transform: scale(1.15); }
+
+    /* ── FORMAT TOKENS ── */
+    .format-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .format-card {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius-md); padding: 16px;
+    }
+    .format-name { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+    .format-dim  { font-size: 11px; color: rgba(255,255,255,0.35); margin-bottom: 10px; }
+    .format-ratio {
+      display: flex; gap: 8px; align-items: center;
+    }
+    .format-vis {
+      background: rgba(43,111,212,0.25); border: 1px solid rgba(43,111,212,0.4);
+      border-radius: 4px;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      padding: var(--space-8);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      text-align: center;
+      color: rgba(255,255,255,0.2);
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="#" class="nav-logo">
+    <span class="at">at</span><span class="brand">DISRUPT</span>
+  </a>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showSection('templates')">Templates</button>
+    <button class="nav-tab" onclick="showSection('builder')">Post Builder</button>
+    <button class="nav-tab" onclick="showSection('formats')">Formatos</button>
+    <button class="nav-tab" onclick="showSection('specs')">Specs</button>
+  </div>
+  <span class="nav-badge">Social Media UI Kit</span>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">at DISRUPT · Social Media Identity</div>
+  <h1 class="hero-title">UI Kit<br><span>Social Media</span></h1>
+  <p class="hero-desc">Sistema de plantillas, componentes y tokens de diseño para los posts de redes sociales de la agencia. Extraído del Bundle de Identidad (53 assets).</p>
+  <div class="hero-stats">
+    <div><div class="stat-val">53</div><div class="stat-lbl">Assets originales</div></div>
+    <div><div class="stat-val">5</div><div class="stat-lbl">Paletas de color</div></div>
+    <div><div class="stat-val">3</div><div class="stat-lbl">Estilos de post</div></div>
+    <div><div class="stat-val">4</div><div class="stat-lbl">Formatos sociales</div></div>
+  </div>
+</div>
+
+<!-- ══ TEMPLATES ═══════════════════════════════════════════════ -->
+<div id="section-templates">
+  <div class="section-wrap">
+    <div class="section-head">
+      <div class="section-title">Post Templates</div>
+      <div class="section-count">53 assets · 3 categorías</div>
+    </div>
+
+    <div style="margin-bottom:24px;">
+      <div class="ctrl-row" id="templateFilter">
+        <button class="ctrl-btn active" onclick="filterTemplates('all',this)">Todos</button>
+        <button class="ctrl-btn" onclick="filterTemplates('logo',this)">Logo &amp; Brand</button>
+        <button class="ctrl-btn" onclick="filterTemplates('color',this)">Color Blobs</button>
+        <button class="ctrl-btn" onclick="filterTemplates('frame',this)">Frame Glass</button>
+        <button class="ctrl-btn" onclick="filterTemplates('editorial',this)">Editorial</button>
+        <button class="ctrl-btn" onclick="filterTemplates('photo',this)">Photo</button>
+      </div>
+    </div>
+
+    <div class="templates-grid" id="templatesGrid">
+      <!-- Injected by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- ══ POST BUILDER ═══════════════════════════════════════════ -->
+<div id="section-builder" style="display:none;">
+  <div class="section-wrap">
+    <div class="section-head">
+      <div class="section-title">Post Builder</div>
+      <div class="section-count">Interactivo</div>
+    </div>
+    <div class="builder-wrap">
+
+      <!-- Canvas -->
+      <div class="post-canvas-wrap">
+        <div class="post-canvas" id="postCanvas">
+          <div class="post-bg" id="postBg"></div>
+          <div class="post-blob-tl" id="blobTL"></div>
+          <div class="post-blob-br" id="blobBR"></div>
+
+          <div class="post-header-bar" id="postHeaderBar">
+            <span class="post-header-label" id="postHeaderLabel">Agency</span>
+            <span class="post-header-logo"><span class="at">at </span>DISRUPT</span>
+          </div>
+
+          <div class="post-content">
+            <div class="post-glass-frame" id="postGlassFrame"></div>
+            <div class="post-tagline" id="postTagline"></div>
+          </div>
+
+          <div class="post-headline" id="postHeadline">
+            Your Headline<br>Goes Here
+          </div>
+        </div>
+        <div style="text-align:center;margin-top:12px;font-size:11px;color:rgba(255,255,255,0.2);">Preview no-scale · 4:5 ratio</div>
+      </div>
+
+      <!-- Controls -->
+      <div class="controls">
+        <div class="control-group">
+          <div class="ctrl-label">Paleta</div>
+          <div class="ctrl-row">
+            <button class="ctrl-btn blue-active active" onclick="setPalette('blue',this)">Azul</button>
+            <button class="ctrl-btn" onclick="setPalette('pink',this)">Rosa</button>
+            <button class="ctrl-btn" onclick="setPalette('violet',this)">Violeta</button>
+            <button class="ctrl-btn" onclick="setPalette('green',this)">Verde</button>
+            <button class="ctrl-btn" onclick="setPalette('dark',this)">Dark</button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="ctrl-label">Estilo</div>
+          <div class="ctrl-row">
+            <button class="ctrl-btn active" onclick="setStyle('glass',this)">Frame Glass</button>
+            <button class="ctrl-btn" onclick="setStyle('typographic',this)">Tipográfico</button>
+            <button class="ctrl-btn" onclick="setStyle('minimal',this)">Minimal</button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="ctrl-label">Headline</div>
+          <textarea class="ctrl-input" id="headlineInput" rows="3" placeholder="Escribe tu headline aquí..." oninput="updateHeadline()">Your Headline
+Goes Here</textarea>
+        </div>
+
+        <div class="control-group">
+          <div class="ctrl-label">Tagline / Cuerpo</div>
+          <textarea class="ctrl-input" id="taglineInput" rows="2" placeholder="Texto de apoyo..." oninput="updateTagline()">Texto de apoyo del post</textarea>
+        </div>
+
+        <div class="control-group">
+          <div class="ctrl-label">CSS Tokens usados</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.3);line-height:1.8;font-family:monospace;" id="tokenDisplay">
+            --bg-off-white<br>--blue-500<br>--glass-bg<br>--radius-xl<br>--font-sans
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FORMATS ════════════════════════════════════════════════ -->
+<div id="section-formats" style="display:none;">
+  <div class="section-wrap">
+    <div class="section-head">
+      <div class="section-title">Formatos Sociales</div>
+      <div class="section-count">4 dimensiones estándar</div>
+    </div>
+    <div class="format-grid">
+      <div class="format-card">
+        <div class="format-name">Square</div>
+        <div class="format-dim">1080 × 1080 px · 1:1</div>
+        <div class="format-ratio">
+          <div class="format-vis" style="width:60px;height:60px;"></div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.4);">Instagram Feed<br>Facebook Post</div>
+        </div>
+      </div>
+      <div class="format-card">
+        <div class="format-name">Portrait 4:5</div>
+        <div class="format-dim">1080 × 1350 px · 4:5</div>
+        <div class="format-ratio">
+          <div class="format-vis" style="width:48px;height:60px;"></div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.4);">Instagram Feed<br>Reach máximo</div>
+        </div>
+      </div>
+      <div class="format-card">
+        <div class="format-name">Story / Reel</div>
+        <div class="format-dim">1080 × 1920 px · 9:16</div>
+        <div class="format-ratio">
+          <div class="format-vis" style="width:34px;height:60px;"></div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.4);">Instagram Stories<br>Facebook Stories</div>
+        </div>
+      </div>
+      <div class="format-card">
+        <div class="format-name">Landscape</div>
+        <div class="format-dim">1200 × 628 px · 1.91:1</div>
+        <div class="format-ratio">
+          <div class="format-vis" style="width:60px;height:31px;"></div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.4);">Facebook / LinkedIn<br>Link preview</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SPECS ══════════════════════════════════════════════════ -->
+<div id="section-specs" style="display:none;">
+  <div class="section-wrap">
+    <div class="section-head">
+      <div class="section-title">Especificaciones</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:var(--space-5);">
+
+      <div class="control-group">
+        <div class="ctrl-label">Márgenes de Composición</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.6);line-height:2.2;">
+          Margen lateral: <strong>5–6% del ancho</strong><br>
+          Header height: <strong>~80px</strong><br>
+          Separador: <strong>1px, opacidad 15%</strong><br>
+          Gap bloques: <strong>24–48px</strong>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <div class="ctrl-label">Efectos Visuales</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.6);line-height:2.2;">
+          Glass blur: <strong>20px</strong><br>
+          Card radius: <strong>24–36px</strong><br>
+          Blob blur: <strong>35–50px</strong><br>
+          Shadow: <strong>0 8px 32px rgba(0,0,0,0.12)</strong>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <div class="ctrl-label">Tipografía Post</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.6);line-height:2.2;">
+          Headline: <strong>Inter Black 900</strong><br>
+          Tracking: <strong>-0.04em</strong><br>
+          Leading: <strong>1.0–1.1</strong><br>
+          Body: <strong>Inter Regular 400 / 1.65</strong>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <div class="ctrl-label">Wordmark Rules</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.6);line-height:2.2;">
+          "at": <strong>10–11px · Weight 500</strong><br>
+          "DISRUPT": <strong>13–28px · Weight 900</strong><br>
+          Always: <strong>top-right, above separator</strong><br>
+          Dark bg: <strong>white text</strong>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  at DISRUPT Social Media UI Kit · Design System v1.0 · 2026 · Generado por Antigravity IDE
+</footer>
+
+<script>
+/* ── TEMPLATE DATA ── */
+const templates = [
+  { n: 1,  name: 'Logo Light',        cat: 'logo',     tags: ['logo','white','clean'], colors: [] },
+  { n: 2,  name: 'Logo Dark',         cat: 'logo',     tags: ['logo','black','dark'], colors: ['dark'] },
+  { n: 3,  name: 'Logo Off-White',    cat: 'logo',     tags: ['logo','gray'], colors: [] },
+  { n: 4,  name: 'Color Blobs Light', cat: 'color',    tags: ['blue','pink','violet','green'], colors: ['blue','pink','violet','green'] },
+  { n: 5,  name: 'Color Blobs Dark',  cat: 'color',    tags: ['dark','multicolor'], colors: ['dark'] },
+  { n: 6,  name: 'Color Blobs Mid',   cat: 'color',    tags: ['blue','pink','violet','green'], colors: ['blue','pink','violet','green'] },
+  { n: 7,  name: 'Sticker × 4',       cat: 'logo',     tags: ['sticker','blue','pink','violet','green'], colors: ['blue','pink','violet','green'] },
+  { n: 8,  name: 'Logo Violet Flower',cat: 'logo',     tags: ['logo','violet'], colors: ['violet'] },
+  { n: 9,  name: 'Blob Mint-Lime',    cat: 'color',    tags: ['green','texture'], colors: ['green'] },
+  { n: 10, name: 'Logo Lilac Flower', cat: 'logo',     tags: ['logo','violet'], colors: ['violet'] },
+  { n: 11, name: 'Asset 11',          cat: 'color',    tags: [], colors: [] },
+  { n: 12, name: 'Gradient BG 12',    cat: 'color',    tags: ['blue'], colors: ['blue'] },
+  { n: 13, name: 'Gradient BG 13',    cat: 'color',    tags: ['pink'], colors: ['pink'] },
+  { n: 14, name: 'Gradient BG 14',    cat: 'color',    tags: ['violet'], colors: ['violet'] },
+  { n: 15, name: 'Gradient BG 15',    cat: 'color',    tags: ['green'], colors: ['green'] },
+  { n: 16, name: 'Gradient BG 16',    cat: 'color',    tags: ['blue'], colors: ['blue'] },
+  { n: 17, name: 'Gradient BG 17',    cat: 'color',    tags: ['pink'], colors: ['pink'] },
+  { n: 18, name: 'Gradient BG 18',    cat: 'color',    tags: ['violet'], colors: ['violet'] },
+  { n: 19, name: 'Gradient BG 19',    cat: 'color',    tags: ['green'], colors: ['green'] },
+  { n: 20, name: 'Frame Glass Blue',  cat: 'frame',    tags: ['glass','blue','light'], colors: ['blue'] },
+  { n: 21, name: 'Frame Glass Pink',  cat: 'frame',    tags: ['glass','pink','light'], colors: ['pink'] },
+  { n: 22, name: 'Frame Glass Violet',cat: 'frame',    tags: ['glass','violet','light'], colors: ['violet'] },
+  { n: 23, name: 'Frame Glass Green', cat: 'frame',    tags: ['glass','green','light'], colors: ['green'] },
+  { n: 24, name: 'Frame Glass 24',    cat: 'frame',    tags: ['glass'], colors: [] },
+  { n: 25, name: 'Frame Dark Pink',   cat: 'frame',    tags: ['glass','pink','dark'], colors: ['pink','dark'] },
+  { n: 26, name: 'Frame Dark 26',     cat: 'frame',    tags: ['glass','dark'], colors: ['dark'] },
+  { n: 27, name: 'Frame Dark 27',     cat: 'frame',    tags: ['glass','dark'], colors: ['dark'] },
+  { n: 28, name: 'Frame 28',          cat: 'frame',    tags: ['glass'], colors: [] },
+  { n: 29, name: 'Frame 29',          cat: 'frame',    tags: ['glass'], colors: [] },
+  { n: 30, name: 'Frame Dark Green',  cat: 'frame',    tags: ['glass','green','dark'], colors: ['green','dark'] },
+  { n: 31, name: 'Frame 31',          cat: 'frame',    tags: ['glass'], colors: [] },
+  { n: 32, name: 'Frame 32',          cat: 'frame',    tags: ['glass'], colors: [] },
+  { n: 33, name: 'Frame 33',          cat: 'frame',    tags: [], colors: [] },
+  { n: 34, name: 'Frame 34',          cat: 'frame',    tags: [], colors: [] },
+  { n: 35, name: 'Editorial Blue',    cat: 'editorial',tags: ['text','blue','light'], colors: ['blue'] },
+  { n: 36, name: 'Editorial Pink',    cat: 'editorial',tags: ['text','pink','light'], colors: ['pink'] },
+  { n: 37, name: 'Editorial Violet',  cat: 'editorial',tags: ['text','violet','light'], colors: ['violet'] },
+  { n: 38, name: 'Editorial Green',   cat: 'editorial',tags: ['text','green','light'], colors: ['green'] },
+  { n: 39, name: 'Editorial Blue Dk', cat: 'editorial',tags: ['text','blue','dark'], colors: ['blue','dark'] },
+  { n: 40, name: 'Editorial Pink Dk', cat: 'editorial',tags: ['text','pink','dark'], colors: ['pink','dark'] },
+  { n: 41, name: 'Editorial Violet Dk',cat:'editorial', tags: ['text','violet','dark'], colors: ['violet','dark'] },
+  { n: 42, name: 'Editorial 42',      cat: 'editorial',tags: ['text'], colors: [] },
+  { n: 43, name: 'Editorial 43',      cat: 'editorial',tags: ['text'], colors: [] },
+  { n: 44, name: 'Editorial 44',      cat: 'editorial',tags: ['text'], colors: [] },
+  { n: 45, name: 'Editorial 45',      cat: 'editorial',tags: ['text'], colors: [] },
+  { n: 46, name: 'Editorial 46',      cat: 'editorial',tags: ['text'], colors: [] },
+  { n: 47, name: 'Editorial 47',      cat: 'editorial',tags: ['text'], colors: [] },
+  { n: 48, name: 'Photo Dark Purple', cat: 'photo',    tags: ['photo','violet','dark'], colors: ['violet','dark'] },
+  { n: 49, name: 'Photo 49',          cat: 'photo',    tags: ['photo'], colors: [] },
+  { n: 50, name: 'Photo AI Rose',     cat: 'photo',    tags: ['photo','pink','dark'], colors: ['pink','dark'] },
+  { n: 51, name: 'Asset 51',          cat: 'editorial',tags: [], colors: [] },
+  { n: 52, name: 'Asset 52',          cat: 'editorial',tags: [], colors: [] },
+  { n: 53, name: 'Asset 53',          cat: 'editorial',tags: [], colors: [] },
+];
+
+const catColorMap = {
+  logo: 'dark', color: '', frame: 'blue', editorial: 'blue', photo: 'dark'
+};
+
+function renderTemplates(filter = 'all') {
+  const grid = document.getElementById('templatesGrid');
+  grid.innerHTML = '';
+  const filtered = filter === 'all' ? templates : templates.filter(t => t.cat === filter);
+  filtered.forEach(t => {
+    const card = document.createElement('div');
+    card.className = 'template-card';
+    const tagsHtml = t.tags.slice(0,3).map(tag => {
+      let cls = '';
+      if (['blue'].includes(tag)) cls = 'blue';
+      else if (['pink'].includes(tag)) cls = 'pink';
+      else if (['violet'].includes(tag)) cls = 'violet';
+      else if (['green'].includes(tag)) cls = 'green';
+      else if (['dark','photo','glass'].includes(tag)) cls = 'dark';
+      return `<span class="tag ${cls}">${tag}</span>`;
+    }).join('');
+    card.innerHTML = `
+      <div class="template-inner">
+        <img src="../../assets/brand/${t.n}.jpg" alt="${t.name}" loading="lazy">
+      </div>
+      <div class="template-meta">
+        <div class="template-name">${t.name}</div>
+        <div class="template-tags">${tagsHtml}</div>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+function filterTemplates(cat, btn) {
+  document.querySelectorAll('#templateFilter .ctrl-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderTemplates(cat);
+}
+
+/* ── SECTION SWITCHING ── */
+function showSection(id) {
+  ['templates','builder','formats','specs'].forEach(s => {
+    document.getElementById('section-' + s).style.display = s === id ? '' : 'none';
+  });
+  document.querySelectorAll('.nav-tab').forEach((t,i) => {
+    t.classList.toggle('active', ['templates','builder','formats','specs'][i] === id);
+  });
+  if (id === 'templates') renderTemplates('all');
+}
+
+/* ── POST BUILDER ── */
+const palettes = {
+  blue: {
+    bg: '#F0EFED',
+    blobTL: 'rgba(123,191,247,0.6)',
+    blobBR: 'rgba(43,111,212,0.4)',
+    glass: 'rgba(255,255,255,0.55)',
+    glassBorder: 'rgba(255,255,255,0.4)',
+    tagline: 'rgba(255,255,255,0.7)',
+    taglineBg: 'rgba(255,255,255,0.35)',
+    taglineBorder: 'rgba(255,255,255,0.3)',
+    headerColor: '#1a1a1a',
+    headerBorder: 'rgba(0,0,0,0.12)',
+    headlineColor: '#1a1a1a',
+    tokens: '--bg-off-white\n--blue-500 · --blue-300\n--glass-bg · --radius-xl\n--shadow-md'
+  },
+  pink: {
+    bg: '#FFF5F5',
+    blobTL: 'rgba(247,168,168,0.6)',
+    blobBR: 'rgba(232,104,122,0.45)',
+    glass: 'rgba(255,255,255,0.55)',
+    glassBorder: 'rgba(255,200,200,0.4)',
+    tagline: 'rgba(120,30,50,0.7)',
+    taglineBg: 'rgba(255,255,255,0.6)',
+    taglineBorder: 'rgba(247,168,168,0.4)',
+    headerColor: '#1a1a1a',
+    headerBorder: 'rgba(0,0,0,0.10)',
+    headlineColor: '#1a1a1a',
+    tokens: '--pink-300 · --pink-500\n--bg-white\n--glass-bg · --radius-xl\n--shadow-sm'
+  },
+  violet: {
+    bg: '#F3F0FF',
+    blobTL: 'rgba(196,176,247,0.6)',
+    blobBR: 'rgba(155,120,232,0.45)',
+    glass: 'rgba(255,255,255,0.55)',
+    glassBorder: 'rgba(200,180,255,0.4)',
+    tagline: 'rgba(255,255,255,0.8)',
+    taglineBg: 'rgba(155,120,232,0.25)',
+    taglineBorder: 'rgba(155,120,232,0.3)',
+    headerColor: '#1a1a1a',
+    headerBorder: 'rgba(0,0,0,0.10)',
+    headlineColor: '#1a1a1a',
+    tokens: '--purple-300 · --purple-500\n--bg-white\n--glass-bg · --radius-xl\n--shadow-sm'
+  },
+  green: {
+    bg: '#F2FFF5',
+    blobTL: 'rgba(133,232,156,0.6)',
+    blobBR: 'rgba(62,201,107,0.45)',
+    glass: 'rgba(255,255,255,0.55)',
+    glassBorder: 'rgba(150,230,170,0.4)',
+    tagline: 'rgba(0,80,30,0.7)',
+    taglineBg: 'rgba(255,255,255,0.6)',
+    taglineBorder: 'rgba(133,232,156,0.4)',
+    headerColor: '#1a1a1a',
+    headerBorder: 'rgba(0,0,0,0.10)',
+    headlineColor: '#1a1a1a',
+    tokens: '--green-300 · --green-500\n--bg-white\n--glass-bg · --radius-xl\n--shadow-sm'
+  },
+  dark: {
+    bg: '#0A0A0A',
+    blobTL: 'rgba(123,191,247,0.35)',
+    blobBR: 'rgba(43,111,212,0.25)',
+    glass: 'rgba(30,30,30,0.6)',
+    glassBorder: 'rgba(255,255,255,0.12)',
+    tagline: 'rgba(255,255,255,0.65)',
+    taglineBg: 'rgba(255,255,255,0.07)',
+    taglineBorder: 'rgba(255,255,255,0.1)',
+    headerColor: '#FFFFFF',
+    headerBorder: 'rgba(255,255,255,0.15)',
+    headlineColor: '#FFFFFF',
+    tokens: '--bg-black · --blue-300\n--glass-bg-dark\n--radius-xl\n--shadow-xl'
+  }
+};
+
+let currentPalette = 'blue';
+let currentStyle = 'glass';
+
+function applyPalette(key) {
+  const p = palettes[key];
+  const canvas = document.getElementById('postCanvas');
+  document.getElementById('postBg').style.background = p.bg;
+  document.getElementById('blobTL').style.background = p.blobTL;
+  document.getElementById('blobBR').style.background = p.blobBR;
+  document.getElementById('postHeaderBar').style.borderBottomColor = p.headerBorder;
+  document.getElementById('postHeaderLabel').style.color = p.headerColor;
+  document.getElementById('postHeadline').style.color = p.headlineColor;
+  document.getElementById('tokenDisplay').textContent = p.tokens;
+  applyStyle(currentStyle, p);
+}
+
+function applyStyle(style, p) {
+  const frame = document.getElementById('postGlassFrame');
+  const tagline = document.getElementById('postTagline');
+  if (style === 'glass') {
+    frame.style.background = p.glass;
+    frame.style.backdropFilter = 'blur(20px)';
+    frame.style.border = `1px solid ${p.glassBorder}`;
+    frame.style.boxShadow = '0 8px 32px rgba(0,0,0,0.1)';
+    tagline.style.display = 'block';
+    tagline.style.background = p.taglineBg;
+    tagline.style.border = `1px solid ${p.taglineBorder}`;
+    tagline.style.color = p.tagline;
+    tagline.style.borderRadius = '16px';
+  } else if (style === 'typographic') {
+    frame.style.background = 'transparent';
+    frame.style.backdropFilter = 'none';
+    frame.style.border = 'none';
+    frame.style.boxShadow = 'none';
+    tagline.style.background = 'transparent';
+    tagline.style.border = 'none';
+    tagline.style.color = p.tagline;
+  } else {
+    frame.style.background = 'transparent';
+    frame.style.backdropFilter = 'none';
+    frame.style.border = 'none';
+    frame.style.boxShadow = 'none';
+    tagline.style.display = 'none';
+  }
+}
+
+function setPalette(key, btn) {
+  currentPalette = key;
+  document.querySelectorAll('.control-group .ctrl-btn').forEach(b => {
+    b.classList.remove('active','blue-active','pink-active','violet-active','green-active');
+  });
+  btn.classList.add('active', key + '-active');
+  applyPalette(key);
+}
+
+function setStyle(style, btn) {
+  currentStyle = style;
+  const group = btn.closest('.ctrl-row');
+  group.querySelectorAll('.ctrl-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  applyStyle(style, palettes[currentPalette]);
+}
+
+function updateHeadline() {
+  const val = document.getElementById('headlineInput').value || 'Your Headline';
+  document.getElementById('postHeadline').innerHTML = val.replace(/\n/g,'<br>');
+}
+function updateTagline() {
+  const val = document.getElementById('taglineInput').value || '';
+  document.getElementById('postTagline').textContent = val;
+}
+
+/* ── INIT ── */
+renderTemplates('all');
+applyPalette('blue');
+</script>
+
+</body>
+</html>

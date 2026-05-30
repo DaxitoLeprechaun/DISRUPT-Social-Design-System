@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DISRUPT — Design System Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-sans);
+      background: #0C0C0C;
+      color: var(--text-on-dark);
+      min-height: 100vh;
+      padding: var(--space-8);
+    }
+
+    /* ── LAYOUT ── */
+    .ds-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: var(--space-8) 0 var(--space-10);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: var(--space-12);
+    }
+    .ds-wordmark {
+      display: flex; align-items: baseline; gap: 6px;
+    }
+    .ds-wordmark .at { font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.5); }
+    .ds-wordmark .brand { font-size: 28px; font-weight: 900; letter-spacing: -0.04em; color: white; }
+    .ds-subtitle { font-size: 12px; color: rgba(255,255,255,0.35); letter-spacing: 0.12em; text-transform: uppercase; }
+
+    .section { margin-bottom: var(--space-16); }
+    .section-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: rgba(255,255,255,0.4);
+      margin-bottom: var(--space-6);
+      display: flex; align-items: center; gap: 12px;
+    }
+    .section-label::after {
+      content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.07);
+    }
+
+    /* ── COLORS ── */
+    .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: var(--space-3); }
+    .color-card {
+      border-radius: var(--radius-md); overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+    .color-swatch { height: 72px; }
+    .color-meta { padding: 10px 12px; background: rgba(255,255,255,0.04); }
+    .color-name { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.7); margin-bottom: 2px; }
+    .color-hex  { font-size: 11px; font-weight: 400; color: rgba(255,255,255,0.35); font-variant-numeric: tabular-nums; }
+
+    /* ── GRADIENTS ── */
+    .gradient-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--space-4); }
+    .gradient-card { border-radius: var(--radius-lg); height: 120px; position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); }
+    .gradient-card span {
+      position: absolute; bottom: 12px; left: 14px;
+      font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.8);
+      letter-spacing: 0.06em; text-transform: uppercase;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+    }
+
+    /* ── TYPOGRAPHY ── */
+    .type-grid { display: flex; flex-direction: column; gap: var(--space-6); }
+    .type-row {
+      display: flex; align-items: baseline; gap: var(--space-6);
+      padding: var(--space-5) var(--space-6);
+      background: rgba(255,255,255,0.03); border-radius: var(--radius-md);
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    .type-meta { min-width: 140px; }
+    .type-tag  { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue-300); margin-bottom: 4px; }
+    .type-spec { font-size: 11px; color: rgba(255,255,255,0.3); line-height: 1.6; }
+    .type-sample { flex: 1; color: white; }
+
+    /* ── COMPONENTS ── */
+    .component-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--space-6); }
+    .component-card {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius-lg); padding: var(--space-6);
+    }
+    .component-title { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.35); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: var(--space-5); }
+
+    /* ── BRAND COMPONENTS ── */
+    /* Post Header */
+    .post-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-bottom: 12px; border-bottom: 1px solid rgba(0,0,0,0.15);
+    }
+    .post-header.dark { border-bottom-color: rgba(255,255,255,0.2); }
+    .post-label { font-size: 11px; color: #666; font-weight: 400; }
+    .post-label.dark { color: rgba(255,255,255,0.55); }
+    .post-logo  { font-size: 14px; font-weight: 900; letter-spacing: -0.02em; color: #1a1a1a; }
+    .post-logo span { font-size: 10px; font-weight: 500; margin-right: 2px; color: #1a1a1a; }
+    .post-logo.white { color: white; }
+    .post-logo.white span { color: white; }
+
+    /* Glass card demo */
+    .glass-demo {
+      background: rgba(255,255,255,0.55);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: var(--radius-xl);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      padding: var(--space-6);
+      color: var(--text-primary);
+    }
+    .glass-demo-dark {
+      background: rgba(30,30,30,0.55);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius-xl);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+      padding: var(--space-6);
+    }
+
+    /* Blob background demo */
+    .blob-bg-light {
+      background: var(--bg-off-white);
+      background-image:
+        radial-gradient(ellipse 45% 40% at 15% 20%, rgba(123,191,247,0.55) 0%, transparent 70%);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+    }
+    .blob-bg-dark {
+      background: #0A0A0A;
+      background-image:
+        radial-gradient(ellipse 40% 35% at 80% 75%, rgba(232,104,122,0.4) 0%, transparent 65%);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+    }
+
+    /* Sticker badge */
+    .sticker {
+      display: inline-flex; flex-direction: column; align-items: center;
+      background: white; border-radius: 24px 24px 24px 4px;
+      padding: 14px 20px 10px;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.18), 0 2px 6px rgba(0,0,0,0.1);
+      color: #1a1a1a;
+    }
+    .sticker .at { font-size: 9px; font-weight: 500; color: #666; align-self: flex-start; margin-bottom: 2px; }
+    .sticker .brand { font-size: 18px; font-weight: 900; letter-spacing: -0.03em; }
+
+    /* Spacing scale */
+    .spacing-grid { display: flex; flex-direction: column; gap: 12px; }
+    .spacing-row { display: flex; align-items: center; gap: 16px; }
+    .spacing-bar { background: var(--blue-400); border-radius: 3px; height: 20px; }
+    .spacing-label { font-size: 11px; color: rgba(255,255,255,0.4); min-width: 80px; }
+    .spacing-val   { font-size: 11px; color: rgba(255,255,255,0.25); }
+
+    /* ── FLOWER ICON ── */
+    .flower {
+      display: inline-block; position: relative; width: 56px; height: 56px;
+    }
+    .flower svg { width: 100%; height: 100%; }
+
+    /* Asset gallery */
+    .asset-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: var(--space-3); }
+    .asset-thumb {
+      border-radius: var(--radius-md); overflow: hidden; aspect-ratio: 4/5;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: transform 200ms var(--ease-out), box-shadow 200ms var(--ease-out);
+    }
+    .asset-thumb:hover { transform: scale(1.03); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+    .asset-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .asset-label { font-size: 10px; color: rgba(255,255,255,0.3); margin-top: 6px; text-align: center; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="ds-header">
+  <div class="ds-wordmark">
+    <div class="flower">
+      <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="28" cy="14" rx="10" ry="14" fill="url(#p1)" opacity="0.9"/>
+        <ellipse cx="42" cy="28" rx="14" ry="10" fill="url(#p2)" opacity="0.85"/>
+        <ellipse cx="28" cy="42" rx="10" ry="14" fill="url(#p3)" opacity="0.9"/>
+        <ellipse cx="14" cy="28" rx="14" ry="10" fill="url(#p4)" opacity="0.85"/>
+        <defs>
+          <linearGradient id="p1" x1="28" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#D9EEFF"/>
+            <stop offset="100%" stop-color="#7BBFF7"/>
+          </linearGradient>
+          <linearGradient id="p2" x1="28" y1="20" x2="56" y2="36" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#B9DCF5"/>
+            <stop offset="100%" stop-color="#5AAAE8"/>
+          </linearGradient>
+          <linearGradient id="p3" x1="28" y1="28" x2="28" y2="56" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#C5E0F7"/>
+            <stop offset="100%" stop-color="#90CAF9"/>
+          </linearGradient>
+          <linearGradient id="p4" x1="0" y1="20" x2="28" y2="36" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#D0E8F8"/>
+            <stop offset="100%" stop-color="#A3CFF5"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+    <div>
+      <div class="at">at</div>
+      <div class="brand">DISRUPT</div>
+    </div>
+  </div>
+  <div class="ds-subtitle">Design System Preview · v1.0 · 2026</div>
+</header>
+
+<!-- ══ 1. COLORS ══════════════════════════════════════════════════ -->
+<section class="section" id="colors">
+  <div class="section-label">Colors</div>
+
+  <div class="section-label" style="font-size:10px;margin-bottom:12px;color:rgba(255,255,255,0.25);">Brand Backgrounds</div>
+  <div class="color-grid" style="margin-bottom: var(--space-8);">
+    <div class="color-card">
+      <div class="color-swatch" style="background:#FFFFFF;border-bottom:1px solid #eee;"></div>
+      <div class="color-meta"><div class="color-name">White</div><div class="color-hex">#FFFFFF</div></div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#F0EFED;"></div>
+      <div class="color-meta"><div class="color-name">Off White</div><div class="color-hex">#F0EFED</div></div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#EAEAE8;"></div>
+      <div class="color-meta"><div class="color-name">Light Gray</div><div class="color-hex">#EAEAE8</div></div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#0A0A0A;"></div>
+      <div class="color-meta"><div class="color-name">Deep Black</div><div class="color-hex">#0A0A0A</div></div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#1C1228;"></div>
+      <div class="color-meta"><div class="color-name">Dark Purple</div><div class="color-hex">#1C1228</div></div>
+    </div>
+  </div>
+
+  <div class="section-label" style="font-size:10px;margin-bottom:12px;color:rgba(255,255,255,0.25);">Brand Blue Family</div>
+  <div class="color-grid" style="margin-bottom: var(--space-8);">
+    <div class="color-card"><div class="color-swatch" style="background:#D9EEFF;"></div><div class="color-meta"><div class="color-name">Blue 100</div><div class="color-hex">#D9EEFF</div></div></div>
+    <div class="color-card"><div class="color-swatch" style="background:#B0D9FA;"></div><div class="color-meta"><div class="color-name">Blue 200</div><div class="color-hex">#B0D9FA</div></div></div>
+    <div class="color-card"><div class="color-swatch" style="background:#7BBFF7;"></div><div class="color-meta"><div class="color-name">Blue 300</div><div class="color-hex">#7BBFF7</div></div></div>
+    <div class="color-card"><div class="color-swatch" style="background:#4A9BE8;"></div><div class="color-meta"><div class="color-name">Blue 400</div><div class="color-hex">#4A9BE8</div></div></div>
+    <div class="color-card"><div class="color-swatch" style="background:#2B6FD4;"></div><div class="color-meta"><div class="color-name">Blue 500 ★</div><div class="color-hex">#2B6FD4</div></div></div>
+    <div class="color-card"><div class="color-swatch" style="background:#1A4FA8;"></div><div class="color-meta"><div class="color-name">Blue 600</div><div class="color-hex">#1A4FA8</div></div></div>
+  </div>
+
+  <div class="section-label" style="font-size:10px;margin-bottom:12px;color:rgba(255,255,255,0.25);">Accent Palette</div>
+  <div class="color-grid">
+    <div class="color-card"><div class="color-swatch" style="background:#F7A8A8;"></div><div class="color-meta"><div class="color-name">Pink 300</div><div class="color-hex">#F7A8A8</div></div></div>
+    <div class="color-card"><div class="color-swatch" style="background:#E8687A;"></div><div class="color-meta"><div class="color-name">Pink 500</div><div class="color-hex">#E8687A</div></div></div>
+    <div class="color-card"><div class="color-swatch" style="background:#C4B0F7;"></div><div class="color-meta"><div class="color-name">Purple 300</div><div class="color-hex">#C4B0F7</div></div></div>
+    <div class="color-card"><div class="color-swatch" style="background:#9B78E8;"></div><div class="color-meta"><div class="color-name">Purple 500</div><div class="color-hex">#9B78E8</div></div></div>
+    <div class="color-card"><div class="color-swatch" style="background:#85E89C;"></div><div class="color-meta"><div class="color-name">Green 300</div><div class="color-hex">#85E89C</div></div></div>
+    <div class="color-card"><div class="color-swatch" style="background:#3EC96B;"></div><div class="color-meta"><div class="color-name">Green 500</div><div class="color-hex">#3EC96B</div></div></div>
+    <div class="color-card"><div class="color-swatch" style="background:#F7C49A;"></div><div class="color-meta"><div class="color-name">Peach 300</div><div class="color-hex">#F7C49A</div></div></div>
+    <div class="color-card"><div class="color-swatch" style="background:#A8D8F0;"></div><div class="color-meta"><div class="color-name">Sky 300</div><div class="color-hex">#A8D8F0</div></div></div>
+  </div>
+</section>
+
+<!-- ══ 2. GRADIENTS ══════════════════════════════════════════════ -->
+<section class="section" id="gradients">
+  <div class="section-label">Gradients</div>
+  <div class="gradient-grid">
+    <div class="gradient-card" style="background: linear-gradient(135deg, #D9EEFF 0%, #7BBFF7 50%, #2B6FD4 100%);">
+      <span>Sky Blue</span>
+    </div>
+    <div class="gradient-card" style="background: linear-gradient(135deg, #FFE5E5 0%, #F7A8A8 50%, #E8687A 100%);">
+      <span style="color:rgba(0,0,0,0.6);">Blush Pink</span>
+    </div>
+    <div class="gradient-card" style="background: linear-gradient(135deg, #EDE8FF 0%, #C4B0F7 50%, #9B78E8 100%);">
+      <span>Violet</span>
+    </div>
+    <div class="gradient-card" style="background: linear-gradient(135deg, #DDFAE0 0%, #85E89C 50%, #3EC96B 100%);">
+      <span style="color:rgba(0,0,0,0.6);">Mint</span>
+    </div>
+    <div class="gradient-card" style="background: linear-gradient(135deg, #FFEBD8 0%, #F7C49A 50%, #E8A87C 100%);">
+      <span style="color:rgba(0,0,0,0.6);">Peach</span>
+    </div>
+    <div class="gradient-card" style="background: linear-gradient(135deg, #0D1B4B 0%, #1A4FA8 60%, #2B6FD4 100%);">
+      <span>Dark Blue</span>
+    </div>
+    <div class="gradient-card" style="background: radial-gradient(ellipse at 20% 30%, rgba(43,111,212,0.55) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(232,104,122,0.45) 0%, transparent 55%), radial-gradient(ellipse at 30% 80%, rgba(155,120,232,0.45) 0%, transparent 60%), radial-gradient(ellipse at 75% 75%, rgba(62,201,107,0.45) 0%, transparent 55%), #F0EFED;">
+      <span style="color:rgba(0,0,0,0.5);">Multi-blob</span>
+    </div>
+    <div class="gradient-card" style="background: radial-gradient(ellipse 45% 40% at 30% 30%, rgba(123,191,247,0.6) 0%, transparent 65%), radial-gradient(ellipse 40% 35% at 70% 70%, rgba(183,222,248,0.5) 0%, transparent 60%), #F0EFED;">
+      <span style="color:rgba(0,0,0,0.5);">Light Blob</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 3. TYPOGRAPHY ══════════════════════════════════════════════ -->
+<section class="section" id="typography">
+  <div class="section-label">Typography — Inter</div>
+  <div class="type-grid">
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="type-tag">Display</div>
+        <div class="type-spec">128px · Black 900<br>tracking: -0.04em</div>
+      </div>
+      <div class="type-sample" style="font-size:48px;font-weight:900;letter-spacing:-0.04em;line-height:1.0;">DISRUPT</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="type-tag">Hero</div>
+        <div class="type-spec">64px · Black 900<br>tracking: -0.04em</div>
+      </div>
+      <div class="type-sample" style="font-size:36px;font-weight:900;letter-spacing:-0.04em;line-height:1.1;">Authority vs.<br>Presence</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="type-tag">Heading</div>
+        <div class="type-spec">36px · Bold 700<br>tracking: -0.02em</div>
+      </div>
+      <div class="type-sample" style="font-size:22px;font-weight:700;letter-spacing:-0.02em;">The large-agency model has a structural flaw</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="type-tag">Body</div>
+        <div class="type-spec">16–22px · Regular 400<br>leading: 1.65</div>
+      </div>
+      <div class="type-sample" style="font-size:15px;font-weight:400;line-height:1.65;color:rgba(255,255,255,0.75);">When you lead through presence, your formal authority is amplified because people respect who is leading, not just the position they hold.</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="type-tag">Label</div>
+        <div class="type-spec">11px · Medium 500<br>tracking: 0.14em · UPPER</div>
+      </div>
+      <div class="type-sample" style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue-300);">Agency · Social Media</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="type-tag">Wordmark</div>
+        <div class="type-spec">Mixed: 10px + 28px<br>Black 900</div>
+      </div>
+      <div class="type-sample">
+        <span style="font-size:11px;font-weight:500;color:rgba(255,255,255,0.4);">at </span>
+        <span style="font-size:26px;font-weight:900;letter-spacing:-0.03em;">DISRUPT</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 4. SPACING ════════════════════════════════════════════════ -->
+<section class="section" id="spacing">
+  <div class="section-label">Spacing Scale</div>
+  <div class="spacing-grid">
+    <div class="spacing-row"><div class="spacing-bar" style="width:4px;"></div><div class="spacing-label">--space-1</div><div class="spacing-val">4px</div></div>
+    <div class="spacing-row"><div class="spacing-bar" style="width:8px;"></div><div class="spacing-label">--space-2</div><div class="spacing-val">8px</div></div>
+    <div class="spacing-row"><div class="spacing-bar" style="width:12px;"></div><div class="spacing-label">--space-3</div><div class="spacing-val">12px</div></div>
+    <div class="spacing-row"><div class="spacing-bar" style="width:16px;"></div><div class="spacing-label">--space-4</div><div class="spacing-val">16px</div></div>
+    <div class="spacing-row"><div class="spacing-bar" style="width:24px;"></div><div class="spacing-label">--space-6</div><div class="spacing-val">24px</div></div>
+    <div class="spacing-row"><div class="spacing-bar" style="width:32px;"></div><div class="spacing-label">--space-8</div><div class="spacing-val">32px</div></div>
+    <div class="spacing-row"><div class="spacing-bar" style="width:48px;"></div><div class="spacing-label">--space-12</div><div class="spacing-val">48px</div></div>
+    <div class="spacing-row"><div class="spacing-bar" style="width:64px;"></div><div class="spacing-label">--space-16</div><div class="spacing-val">64px</div></div>
+    <div class="spacing-row"><div class="spacing-bar" style="width:96px;"></div><div class="spacing-label">--space-24</div><div class="spacing-val">96px</div></div>
+  </div>
+</section>
+
+<!-- ══ 5. COMPONENTS ════════════════════════════════════════════ -->
+<section class="section" id="components">
+  <div class="section-label">Components</div>
+  <div class="component-grid">
+
+    <!-- Post Header Light -->
+    <div class="component-card">
+      <div class="component-title">Post Header — Light</div>
+      <div style="background:#F0EFED;border-radius:12px;padding:16px 20px;">
+        <div class="post-header">
+          <span class="post-label">Agency</span>
+          <span class="post-logo"><span>at </span>DISRUPT</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Post Header Dark -->
+    <div class="component-card">
+      <div class="component-title">Post Header — Dark</div>
+      <div style="background:#0A0A0A;border-radius:12px;padding:16px 20px;">
+        <div class="post-header dark">
+          <span class="post-label dark">Agency</span>
+          <span class="post-logo white"><span>at </span>DISRUPT</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Glass Card Light -->
+    <div class="component-card">
+      <div class="component-title">Glassmorphism — Light</div>
+      <div class="blob-bg-light">
+        <div class="glass-demo">
+          <div style="font-size:13px;font-weight:600;color:#1a1a1a;margin-bottom:6px;">Glass Card</div>
+          <div style="font-size:11px;color:#666;">backdrop-filter: blur(20px)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Glass Card Dark -->
+    <div class="component-card">
+      <div class="component-title">Glassmorphism — Dark</div>
+      <div class="blob-bg-dark">
+        <div class="glass-demo-dark">
+          <div style="font-size:13px;font-weight:600;color:white;margin-bottom:6px;">Glass Card Dark</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.45);">rgba(30,30,30,0.55)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sticker -->
+    <div class="component-card" style="display:flex;flex-direction:column;align-items:flex-start;gap:16px;">
+      <div class="component-title">Brand Sticker</div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;">
+        <div class="sticker">
+          <span class="at">at</span>
+          <span class="brand">DISRUPT</span>
+        </div>
+        <div class="sticker" style="background:linear-gradient(135deg,#FFE5E5,#F7A8A8);">
+          <span class="at">at</span>
+          <span class="brand">DISRUPT</span>
+        </div>
+        <div class="sticker" style="background:linear-gradient(135deg,#EDE8FF,#C4B0F7);">
+          <span class="at">at</span>
+          <span class="brand">DISRUPT</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Color Blob Blobs -->
+    <div class="component-card">
+      <div class="component-title">Gradient Blobs</div>
+      <div style="height:120px;border-radius:12px;overflow:hidden;background:#F0EFED;position:relative;">
+        <div style="position:absolute;width:100px;height:80px;top:5px;left:5px;border-radius:50%;background:radial-gradient(ellipse,rgba(43,111,212,0.5) 0%,transparent 70%);filter:blur(16px);"></div>
+        <div style="position:absolute;width:80px;height:70px;top:10px;right:10px;border-radius:50%;background:radial-gradient(ellipse,rgba(232,104,122,0.5) 0%,transparent 70%);filter:blur(14px);"></div>
+        <div style="position:absolute;width:90px;height:65px;bottom:5px;left:30px;border-radius:50%;background:radial-gradient(ellipse,rgba(155,120,232,0.45) 0%,transparent 70%);filter:blur(16px);"></div>
+        <div style="position:absolute;width:75px;height:60px;bottom:8px;right:5px;border-radius:50%;background:radial-gradient(ellipse,rgba(62,201,107,0.45) 0%,transparent 70%);filter:blur(14px);"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ 6. BRAND ASSETS ══════════════════════════════════════════ -->
+<section class="section" id="brand-assets">
+  <div class="section-label">Brand Assets — 53 Imágenes</div>
+  <div class="asset-grid" id="assetGrid"></div>
+</section>
+
+<script>
+  // Render asset thumbnails
+  const grid = document.getElementById('assetGrid');
+  const assetNums = [...Array(53).keys()].map(i => i + 1).filter(n => n !== 0);
+  // Fill 1-53 (no 0)
+  for (let n = 1; n <= 53; n++) {
+    const wrap = document.createElement('div');
+    const thumb = document.createElement('div');
+    thumb.className = 'asset-thumb';
+    const img = document.createElement('img');
+    img.src = `../assets/brand/${n}.jpg`;
+    img.alt = `Asset ${n}`;
+    img.loading = 'lazy';
+    thumb.appendChild(img);
+    const lbl = document.createElement('div');
+    lbl.className = 'asset-label';
+    lbl.textContent = `${n}.jpg`;
+    wrap.appendChild(thumb);
+    wrap.appendChild(lbl);
+    grid.appendChild(wrap);
+  }
+</script>
+
+</body>
+</html>

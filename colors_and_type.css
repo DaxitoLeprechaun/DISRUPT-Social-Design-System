@@ -1,0 +1,252 @@
+/* ═══════════════════════════════════════════════════════════════
+   DISRUPT — Social Media Design System
+   colors_and_type.css  |  v1.0  |  2026
+   Source: Bundle de Identidad Redes Sociales (53 assets)
+   ═══════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+/* ── ROOT TOKENS ──────────────────────────────────────────────── */
+:root {
+
+  /* ── BACKGROUNDS ── */
+  --bg-white:       #FFFFFF;
+  --bg-off-white:   #F0EFED;   /* warm near-white from light-mode posts */
+  --bg-light-gray:  #EAEAE8;   /* secondary surface */
+  --bg-black:       #0A0A0A;   /* primary dark mode */
+  --bg-dark-purple: #1C1228;   /* editorial dark (AI/rose post) */
+
+  /* ── BRAND BLUES (core family) ── */
+  --blue-100:  #D9EEFF;
+  --blue-200:  #B0D9FA;
+  --blue-300:  #7BBFF7;        /* light brand blue / icon glow */
+  --blue-400:  #4A9BE8;        /* mid accent */
+  --blue-500:  #2B6FD4;        /* core blue */
+  --blue-600:  #1A4FA8;        /* deep trust blue */
+
+  /* ── ACCENT PALETTE (from gradient blobs) ── */
+  --pink-100:  #FFE5E5;
+  --pink-300:  #F7A8A8;        /* soft blush pink */
+  --pink-500:  #E8687A;        /* editorial rose */
+
+  --purple-100: #EDE8FF;
+  --purple-300: #C4B0F7;       /* lavender lilac */
+  --purple-500: #9B78E8;       /* editorial violet */
+
+  --green-100:  #DDFAE0;
+  --green-300:  #85E89C;       /* mint/neon green */
+  --green-500:  #3EC96B;       /* vivid brand green */
+
+  --peach-100: #FFEBD8;
+  --peach-300: #F7C49A;        /* warm peach */
+
+  --sky-100: #E0F5FF;
+  --sky-300: #A8D8F0;          /* sky / ice blue */
+
+  /* ── NEUTRALS ── */
+  --gray-50:   #F8F8F8;
+  --gray-100:  #EFEFEF;
+  --gray-200:  #E0E0E0;
+  --gray-300:  #C7C7C7;
+  --gray-400:  #9E9E9E;
+  --gray-500:  #717171;
+  --gray-600:  #4A4A4A;
+  --gray-700:  #2E2E2E;
+  --gray-800:  #1A1A1A;
+  --gray-900:  #0A0A0A;
+
+  /* ── TEXT ── */
+  --text-primary:     #1A1A1A;   /* near-black from wordmarks */
+  --text-secondary:   #4A4A4A;
+  --text-tertiary:    #9E9E9E;
+  --text-on-dark:     #FFFFFF;
+  --text-on-dark-muted: rgba(255,255,255,0.6);
+  --text-label:       #6B6B6B;   /* "Agency" label text */
+
+  /* ── BRAND SEMANTIC ── */
+  --brand-primary:    var(--blue-500);
+  --brand-accent-1:   var(--sky-300);          /* flower petal light */
+  --brand-accent-2:   var(--blue-300);         /* flower petal mid */
+  --brand-accent-3:   var(--blue-600);         /* dark variant */
+  --brand-cta:        var(--blue-500);
+  --brand-danger:     var(--pink-500);
+  --brand-success:    var(--green-500);
+  --brand-warning:    var(--peach-300);
+
+  /* ── GRADIENTS ── */
+  --gradient-sky:       linear-gradient(135deg, #D9EEFF 0%, #7BBFF7 50%, #2B6FD4 100%);
+  --gradient-pink:      linear-gradient(135deg, #FFE5E5 0%, #F7A8A8 50%, #E8687A 100%);
+  --gradient-violet:    linear-gradient(135deg, #EDE8FF 0%, #C4B0F7 50%, #9B78E8 100%);
+  --gradient-mint:      linear-gradient(135deg, #DDFAE0 0%, #85E89C 50%, #3EC96B 100%);
+  --gradient-peach:     linear-gradient(135deg, #FFEBD8 0%, #F7C49A 50%, #E8A87C 100%);
+  --gradient-dark-blue: linear-gradient(135deg, #0D1B4B 0%, #1A4FA8 60%, #2B6FD4 100%);
+  --gradient-multiblob: radial-gradient(ellipse at 20% 30%, rgba(43,111,212,0.45) 0%, transparent 60%),
+                        radial-gradient(ellipse at 80% 20%, rgba(232,104,122,0.35) 0%, transparent 55%),
+                        radial-gradient(ellipse at 30% 80%, rgba(155,120,232,0.35) 0%, transparent 60%),
+                        radial-gradient(ellipse at 75% 75%, rgba(62,201,107,0.35) 0%, transparent 55%);
+  --gradient-light-blob: radial-gradient(ellipse at 30% 30%, rgba(123,191,247,0.5) 0%, transparent 55%),
+                         radial-gradient(ellipse at 70% 70%, rgba(183,222,248,0.4) 0%, transparent 55%);
+
+  /* ── GLASS / GLASSMORPHISM ── */
+  --glass-bg:           rgba(255, 255, 255, 0.55);
+  --glass-bg-dark:      rgba(30, 30, 30, 0.55);
+  --glass-border:       rgba(255, 255, 255, 0.35);
+  --glass-border-dark:  rgba(255, 255, 255, 0.12);
+  --glass-blur:         20px;
+  --glass-shadow:       0 8px 32px rgba(0,0,0,0.12);
+  --glass-shadow-dark:  0 8px 32px rgba(0,0,0,0.45);
+
+  /* ── BORDERS & RADIUS ── */
+  --radius-sm:    8px;
+  --radius-md:    16px;
+  --radius-lg:    24px;
+  --radius-xl:    36px;
+  --radius-2xl:   48px;
+  --radius-full:  9999px;
+
+  /* ── SPACING SCALE ── */
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:   12px;
+  --space-4:   16px;
+  --space-5:   20px;
+  --space-6:   24px;
+  --space-8:   32px;
+  --space-10:  40px;
+  --space-12:  48px;
+  --space-16:  64px;
+  --space-20:  80px;
+  --space-24:  96px;
+  --space-32: 128px;
+
+  /* ── TYPOGRAPHY SCALE ── */
+  --font-sans:        'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --text-xs:    11px;
+  --text-sm:    13px;
+  --text-base:  16px;
+  --text-lg:    18px;
+  --text-xl:    22px;
+  --text-2xl:   28px;
+  --text-3xl:   36px;
+  --text-4xl:   48px;
+  --text-5xl:   64px;
+  --text-6xl:   80px;
+  --text-7xl:  100px;
+  --text-8xl:  128px;
+
+  --weight-light:    300;
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+  --weight-extrabold: 800;
+  --weight-black:    900;
+
+  --leading-tight:    1.1;
+  --leading-snug:     1.25;
+  --leading-normal:   1.5;
+  --leading-relaxed:  1.65;
+
+  --tracking-tight:  -0.04em;
+  --tracking-snug:   -0.02em;
+  --tracking-normal:  0em;
+  --tracking-wide:    0.05em;
+  --tracking-widest:  0.15em;
+
+  /* ── SHADOWS ── */
+  --shadow-xs:  0 1px 3px rgba(0,0,0,0.08);
+  --shadow-sm:  0 2px 8px rgba(0,0,0,0.10);
+  --shadow-md:  0 4px 20px rgba(0,0,0,0.12);
+  --shadow-lg:  0 8px 40px rgba(0,0,0,0.16);
+  --shadow-xl:  0 16px 64px rgba(0,0,0,0.22);
+  --shadow-2xl: 0 24px 80px rgba(0,0,0,0.30);
+
+  /* ── TRANSITIONS ── */
+  --ease-out:  cubic-bezier(0.0, 0.0, 0.2, 1);
+  --ease-in:   cubic-bezier(0.4, 0.0, 1, 1);
+  --ease-inout: cubic-bezier(0.4, 0.0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  --duration-fast:    150ms;
+  --duration-normal:  250ms;
+  --duration-slow:    400ms;
+  --duration-slower:  600ms;
+
+  /* ── SOCIAL MEDIA POST DIMENSIONS ── */
+  --post-square:     1080px;  /* Instagram 1:1 */
+  --post-portrait:   1080px;  /* width; height = 1350px (4:5) */
+  --post-portrait-h: 1350px;
+  --post-story-w:     1080px; /* 9:16 */
+  --post-story-h:     1920px;
+  --post-landscape-w: 1200px; /* Facebook/LinkedIn 1.91:1 */
+  --post-landscape-h:  628px;
+
+  /* ── BRAND ICON / BLOB COLORS (the DISRUPT flower) ── */
+  --flower-petal-1: #B9DCF5;   /* top petal — light blue */
+  --flower-petal-2: #A8CEF0;   /* right petal */
+  --flower-petal-3: #C5E0F7;   /* bottom petal */
+  --flower-petal-4: #D0E8F8;   /* left petal */
+  --flower-center:  #DAEEFA;   /* center overlap */
+}
+
+/* ── BASE RESET (lightweight) ──────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+body { font-family: var(--font-sans); color: var(--text-primary); background: var(--bg-white); }
+
+/* ── UTILITY CLASSES ───────────────────────────────────────────── */
+
+/* Colors */
+.bg-black        { background: var(--bg-black); }
+.bg-white        { background: var(--bg-white); }
+.bg-off-white    { background: var(--bg-off-white); }
+.bg-dark-purple  { background: var(--bg-dark-purple); }
+.bg-blue         { background: var(--blue-500); }
+.bg-gradient-sky     { background: var(--gradient-sky); }
+.bg-gradient-pink    { background: var(--gradient-pink); }
+.bg-gradient-violet  { background: var(--gradient-violet); }
+.bg-gradient-mint    { background: var(--gradient-mint); }
+.bg-gradient-peach   { background: var(--gradient-peach); }
+
+/* Typography */
+.text-display { font-size: var(--text-7xl); font-weight: var(--weight-black); letter-spacing: var(--tracking-tight); line-height: var(--leading-tight); }
+.text-hero    { font-size: var(--text-5xl); font-weight: var(--weight-black); letter-spacing: var(--tracking-tight); line-height: var(--leading-tight); }
+.text-heading { font-size: var(--text-3xl); font-weight: var(--weight-bold);  letter-spacing: var(--tracking-snug); }
+.text-title   { font-size: var(--text-2xl); font-weight: var(--weight-bold);  }
+.text-body    { font-size: var(--text-base); font-weight: var(--weight-regular); line-height: var(--leading-relaxed); }
+.text-label   { font-size: var(--text-xs);  font-weight: var(--weight-medium); letter-spacing: var(--tracking-wide); text-transform: uppercase; }
+
+/* Glass */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--glass-shadow);
+}
+.glass-dark {
+  background: var(--glass-bg-dark);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border-dark);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--glass-shadow-dark);
+}
+
+/* DISRUPT Flower Blob */
+.flower-blob {
+  position: relative;
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+.flower-blob::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-light-blob);
+  border-radius: 60% 40% 55% 45% / 45% 55% 40% 60%;
+  filter: blur(2px);
+}

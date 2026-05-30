@@ -15,13 +15,14 @@
 | **Alcance** | Social Media Posts — Instagram, Facebook, LinkedIn |
 | **Formatos cubiertos** | 1:1 (Square), 4:5 (Portrait), 9:16 (Stories), 1.91:1 (Landscape) |
 | **Idioma visual** | Glassmorphism · Gradient blobs · Ultra-bold type · Dark/Light duality |
-| **Fuente de assets** | `Bundle de Identidad Redes Sociales/` — 53 JPGs |
+| **Fuente de assets** | `Bundle de Identidad Redes Sociales/` — 53 JPGs + 8 SVGs vectoriales |
 
 ### Sources
-- `assets/brand/` — 53 imágenes originales del Bundle
+- `assets/brand/` — 53 imágenes originales del Bundle (JPG)
+- `assets/logos/` — **8 archivos SVG vectoriales oficiales de la marca** *(nuevo)*
 - `colors_and_type.css` — tokens de color, tipo, espaciado y efectos
 - `preview/` — cards HTML de referencia visual
-- `ui_kits/social_media/` — UI kit completo para posts
+- `ui_kits/social_media/` — UI kit completo para posts (v2.0 con logos SVG)
 - `SKILL.md` — skill para agentes AI
 
 ---
@@ -165,7 +166,20 @@ ESTRUCTURA PHOTO (dark)
 
 El ícono es una abstracción de **4 pétalos redondeados** organizados en cruz, con superposición central translúcida. Representa innovación orgánica y conectividad.
 
-**Variantes documentadas:**
+**Archivos SVG vectoriales (en `assets/logos/`):**
+
+| Archivo | Descripción | ViewBox |
+|---|---|---|
+| `wordmark-horizontal.svg` | Wordmark tipográfico completo "at disrupt" | 633.44 × 152.99 |
+| `logo-light-bg.svg` | Aplicación completa sobre fondo claro | 612 × 792 |
+| `logo-dark-bg.svg` | Aplicación completa sobre fondo oscuro | 612 × 792 |
+| `logo-flower-full.svg` | Hoja de identidad / portfolio de marca | 612 × 792 |
+| `flower-icon-blue.svg` | Ícono flor — Azul (#2B6FD4) | 306 × 306 |
+| `flower-icon-pink.svg` | Ícono flor — Rosa (#E8687A) | 306 × 306 |
+| `flower-icon-violet.svg` | Ícono flor — Violeta (#9B78E8) | 306 × 306 |
+| `flower-icon-green.svg` | Ícono flor — Verde (#3EC96B) | 306 × 306 |
+
+**Variantes JPG de referencia:**
 - `1.jpg` — Logo blanco sobre fondo blanco (versión limpia)
 - `2.jpg` — Logo blanco sobre negro (versión oscura)
 - `3.jpg` — Logo negro sobre off-white
@@ -176,11 +190,13 @@ El ícono es una abstracción de **4 pétalos redondeados** organizados en cruz,
 **Reglas de uso:**
 1. La flor siempre acompaña al wordmark "at DISRUPT" — nunca va sola en posts
 2. En fondos de color, el logo aparece como sticker blanco opaco con sombra
-3. En dark mode: flor en gradiente ice-blue, wordmark en blanco
+3. En dark mode: `filter: invert(1)` sobre el SVG, wordmark en blanco
 4. La flor se escala al 60–80% del alto del wordmark
+5. **Usar siempre los SVG** para web, apps y mockups — JPGs solo para referencia
 
 ### Sistema de Stickers
 Los stickers (imagen `7.jpg`) muestran el logo sobre fondo blanco con esquinas redondeadas + sombra de despegado. Versiones: Azul, Rosa, Violeta, Verde.
+Para uso digital, usar los archivos `flower-icon-[color].svg` correspondientes.
 
 ---
 
@@ -195,6 +211,16 @@ DISRUPT-Social-Design-System/
 ├── fonts/                             ← (Inter via Google Fonts CDN)
 │
 ├── assets/
+│   ├── logos/                         ← ★ 8 SVGs vectoriales oficiales (NUEVO)
+│   │   ├── wordmark-horizontal.svg    → Wordmark tipográfico horizontal
+│   │   ├── logo-light-bg.svg          → Aplicación sobre fondo claro
+│   │   ├── logo-dark-bg.svg           → Aplicación sobre fondo oscuro
+│   │   ├── logo-flower-full.svg       → Hoja de identidad / portfolio
+│   │   ├── flower-icon-blue.svg       → Ícono flor — Azul
+│   │   ├── flower-icon-pink.svg       → Ícono flor — Rosa
+│   │   ├── flower-icon-violet.svg     → Ícono flor — Violeta
+│   │   └── flower-icon-green.svg      → Ícono flor — Verde
+│   │
 │   └── brand/                         ← 53 JPGs originales del Bundle
 │       ├── 1.jpg  → Logo light (white bg)
 │       ├── 2.jpg  → Logo dark (black bg)
@@ -223,7 +249,7 @@ DISRUPT-Social-Design-System/
 │
 └── ui_kits/
     └── social_media/
-        └── index.html                 ← UI Kit completo Social Media
+        └── index.html                 ← UI Kit v2.0 · con sección Logos SVG
 ```
 
 ---
@@ -252,4 +278,29 @@ DISRUPT-Social-Design-System/
 
 ---
 
-*Generado por Antigravity IDE · Mayo 2026*
+## USO DE LOS SVG EN CÓDIGO
+
+```html
+<!-- Wordmark en la nav (dark mode) -->
+<img src="assets/logos/wordmark-horizontal.svg"
+     alt="at DISRUPT"
+     style="height:28px; filter:invert(1);">
+
+<!-- Wordmark en la nav (light mode) -->
+<img src="assets/logos/wordmark-horizontal.svg"
+     alt="at DISRUPT"
+     style="height:28px;">
+
+<!-- Ícono flor inline (sin filtros) -->
+<img src="assets/logos/flower-icon-blue.svg"
+     alt="DISRUPT"
+     width="48" height="48">
+
+<!-- En CSS: cambio de tema -->
+.logo-dark  img { filter: invert(1); }  /* logo blanco sobre oscuro */
+.logo-light img { filter: none; }       /* logo negro sobre claro */
+```
+
+---
+
+*Generado por Antigravity IDE · Mayo 2026 · v2.0 — Logos SVG integrados*

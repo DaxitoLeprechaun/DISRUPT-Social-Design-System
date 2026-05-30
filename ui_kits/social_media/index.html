@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DISRUPT — Social Media UI Kit</title>
-  <meta name="description" content="UI Kit completo para Social Media de la agencia at DISRUPT — Templates, componentes y especificaciones.">
+  <meta name="description" content="UI Kit completo para Social Media de la agencia at DISRUPT — Templates, componentes, logos SVG y especificaciones.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../colors_and_type.css">
@@ -22,7 +22,7 @@
     /* ── NAV ── */
     .nav {
       position: sticky; top: 0; z-index: 100;
-      background: rgba(8,8,8,0.85);
+      background: rgba(8,8,8,0.92);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid rgba(255,255,255,0.06);
       padding: 0 var(--space-8);
@@ -30,8 +30,17 @@
       height: 60px;
     }
     .nav-logo {
-      display: flex; align-items: baseline; gap: 5px;
+      display: flex; align-items: center; gap: 0;
       text-decoration: none; color: inherit;
+      height: 36px;
+    }
+    .nav-logo img {
+      height: 28px; width: auto;
+      filter: invert(1);
+      opacity: 0.95;
+    }
+    .nav-logo .nav-logo-text {
+      display: flex; align-items: baseline; gap: 5px;
     }
     .nav-logo .at  { font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.4); }
     .nav-logo .brand { font-size: 20px; font-weight: 900; letter-spacing: -0.03em; }
@@ -133,6 +142,11 @@
     .post-header-label { font-size: 10px; font-weight: 400; }
     .post-header-logo  { font-size: 13px; font-weight: 900; letter-spacing: -0.02em; }
     .post-header-logo .at { font-size: 9px; font-weight: 500; margin-right: 2px; }
+    /* SVG logo inside post */
+    .post-header-svg {
+      height: 18px; width: auto;
+      transition: filter 400ms;
+    }
     .post-content {
       position: relative; z-index: 10;
       padding: 20px 22px;
@@ -210,6 +224,154 @@
       border-radius: 4px;
     }
 
+    /* ── LOGOS SVG SECTION ── */
+    .logos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+    .logo-card {
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255,255,255,0.08);
+      overflow: hidden;
+      transition: transform 200ms, box-shadow 200ms;
+      cursor: default;
+    }
+    .logo-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+    }
+    .logo-preview {
+      padding: 40px 48px;
+      display: flex; align-items: center; justify-content: center;
+      min-height: 160px;
+    }
+    .logo-preview img {
+      max-width: 100%; max-height: 120px; width: auto; height: auto;
+    }
+    /* Preview backgrounds */
+    .logo-preview.bg-dark     { background: #0A0A0A; }
+    .logo-preview.bg-light    { background: #F0EFED; }
+    .logo-preview.bg-white    { background: #FFFFFF; }
+    .logo-preview.bg-blue     { background: linear-gradient(135deg, #D9EEFF 0%, #7BBFF7 100%); }
+    .logo-preview.bg-pink     { background: linear-gradient(135deg, #FFE8E8 0%, #F7A8A8 100%); }
+    .logo-preview.bg-violet   { background: linear-gradient(135deg, #EDE8FF 0%, #C4B0F7 100%); }
+    .logo-preview.bg-green    { background: linear-gradient(135deg, #E8FFE8 0%, #85E89C 100%); }
+    .logo-preview.bg-checker  {
+      background-image: linear-gradient(45deg, #2a2a2a 25%, transparent 25%),
+                        linear-gradient(-45deg, #2a2a2a 25%, transparent 25%),
+                        linear-gradient(45deg, transparent 75%, #2a2a2a 75%),
+                        linear-gradient(-45deg, transparent 75%, #2a2a2a 75%);
+      background-size: 20px 20px;
+      background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+      background-color: #1a1a1a;
+    }
+    .logo-card-meta {
+      padding: 16px 20px;
+      background: rgba(255,255,255,0.03);
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .logo-card-name {
+      font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.85);
+      margin-bottom: 4px;
+    }
+    .logo-card-desc {
+      font-size: 11px; color: rgba(255,255,255,0.35); line-height: 1.5;
+      margin-bottom: 10px;
+    }
+    .logo-card-meta-row {
+      display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
+    }
+    .logo-badge {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 3px 8px; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.4);
+    }
+    .logo-badge.svg { border-color: rgba(43,111,212,0.4); color: var(--blue-300); }
+    .logo-badge.dark-use  { border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.6); }
+    .logo-badge.light-use { border-color: rgba(0,0,0,0.2); color: rgba(255,255,255,0.5); }
+    .logo-badge.icon-only { border-color: rgba(196,176,247,0.4); color: var(--purple-300); }
+
+    /* Download button */
+    .logo-download-btn {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 5px 12px; border-radius: 999px;
+      background: rgba(43,111,212,0.15); border: 1px solid rgba(43,111,212,0.3);
+      color: var(--blue-300); text-decoration: none;
+      transition: all 150ms;
+    }
+    .logo-download-btn:hover {
+      background: rgba(43,111,212,0.28); border-color: rgba(43,111,212,0.5);
+    }
+
+    /* Wordmark full-width card */
+    .logo-card-wide {
+      grid-column: 1 / -1;
+    }
+    .logo-preview-wide {
+      padding: 60px 80px;
+      min-height: 200px;
+    }
+    .logo-preview-wide img {
+      max-width: 540px; height: auto;
+    }
+
+    /* Icon grid for flower variants */
+    .flower-icons-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .flower-icon-card {
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255,255,255,0.08);
+      overflow: hidden;
+      transition: transform 200ms;
+    }
+    .flower-icon-card:hover { transform: translateY(-2px); }
+    .flower-icon-preview {
+      padding: 28px; display: flex; align-items: center; justify-content: center;
+      min-height: 120px;
+    }
+    .flower-icon-preview img {
+      width: 72px; height: 72px; object-fit: contain;
+    }
+    .flower-icon-meta {
+      padding: 10px 14px;
+      background: rgba(255,255,255,0.03);
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .flower-icon-name { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.7); margin-bottom: 3px; }
+    .flower-icon-hex  { font-size: 10px; color: rgba(255,255,255,0.3); font-family: monospace; }
+
+    /* Usage rules */
+    .usage-rules {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .usage-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+    }
+    .usage-card-title {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--blue-300); margin-bottom: 12px;
+    }
+    .usage-card ul {
+      list-style: none; padding: 0;
+    }
+    .usage-card ul li {
+      font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.7; padding-left: 14px; position: relative;
+    }
+    .usage-card ul li::before {
+      content: '→'; position: absolute; left: 0; color: rgba(255,255,255,0.25);
+    }
+
     /* ── FOOTER ── */
     .footer {
       padding: var(--space-8);
@@ -224,27 +386,31 @@
 
 <!-- NAV -->
 <nav class="nav">
-  <a href="#" class="nav-logo">
-    <span class="at">at</span><span class="brand">DISRUPT</span>
+  <a href="#" class="nav-logo" title="at DISRUPT">
+    <img src="../../assets/logos/wordmark-horizontal.svg" alt="at DISRUPT wordmark" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+    <div class="nav-logo-text" style="display:none;">
+      <span class="at">at</span><span class="brand">DISRUPT</span>
+    </div>
   </a>
   <div class="nav-tabs">
-    <button class="nav-tab active" onclick="showSection('templates')">Templates</button>
-    <button class="nav-tab" onclick="showSection('builder')">Post Builder</button>
-    <button class="nav-tab" onclick="showSection('formats')">Formatos</button>
-    <button class="nav-tab" onclick="showSection('specs')">Specs</button>
+    <button class="nav-tab active"  onclick="showSection('templates')" id="tab-templates">Templates</button>
+    <button class="nav-tab"         onclick="showSection('logos')"     id="tab-logos">Logos SVG</button>
+    <button class="nav-tab"         onclick="showSection('builder')"   id="tab-builder">Post Builder</button>
+    <button class="nav-tab"         onclick="showSection('formats')"   id="tab-formats">Formatos</button>
+    <button class="nav-tab"         onclick="showSection('specs')"     id="tab-specs">Specs</button>
   </div>
-  <span class="nav-badge">Social Media UI Kit</span>
+  <span class="nav-badge">Social Media UI Kit v2.0</span>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
   <div class="hero-eyebrow">at DISRUPT · Social Media Identity</div>
   <h1 class="hero-title">UI Kit<br><span>Social Media</span></h1>
-  <p class="hero-desc">Sistema de plantillas, componentes y tokens de diseño para los posts de redes sociales de la agencia. Extraído del Bundle de Identidad (53 assets).</p>
+  <p class="hero-desc">Sistema de plantillas, logos SVG, componentes y tokens de diseño para los posts de redes sociales de la agencia. Bundle de Identidad (53 assets + 8 SVGs vectoriales).</p>
   <div class="hero-stats">
-    <div><div class="stat-val">53</div><div class="stat-lbl">Assets originales</div></div>
+    <div><div class="stat-val">53</div><div class="stat-lbl">Assets JPG</div></div>
+    <div><div class="stat-val">8</div><div class="stat-lbl">Logos SVG</div></div>
     <div><div class="stat-val">5</div><div class="stat-lbl">Paletas de color</div></div>
-    <div><div class="stat-val">3</div><div class="stat-lbl">Estilos de post</div></div>
     <div><div class="stat-val">4</div><div class="stat-lbl">Formatos sociales</div></div>
   </div>
 </div>
@@ -254,13 +420,13 @@
   <div class="section-wrap">
     <div class="section-head">
       <div class="section-title">Post Templates</div>
-      <div class="section-count">53 assets · 3 categorías</div>
+      <div class="section-count">53 assets · 5 categorías</div>
     </div>
 
     <div style="margin-bottom:24px;">
       <div class="ctrl-row" id="templateFilter">
         <button class="ctrl-btn active" onclick="filterTemplates('all',this)">Todos</button>
-        <button class="ctrl-btn" onclick="filterTemplates('logo',this)">Logo &amp; Brand</button>
+        <button class="ctrl-btn" onclick="filterTemplates('logo',this)">Logo & Brand</button>
         <button class="ctrl-btn" onclick="filterTemplates('color',this)">Color Blobs</button>
         <button class="ctrl-btn" onclick="filterTemplates('frame',this)">Frame Glass</button>
         <button class="ctrl-btn" onclick="filterTemplates('editorial',this)">Editorial</button>
@@ -274,12 +440,183 @@
   </div>
 </div>
 
+<!-- ══ LOGOS SVG ═══════════════════════════════════════════════ -->
+<div id="section-logos" style="display:none;">
+  <div class="section-wrap">
+    <div class="section-head">
+      <div class="section-title">Logos & Marca SVG</div>
+      <div class="section-count">8 archivos vectoriales · Escalables al infinito</div>
+    </div>
+
+    <!-- Wordmark horizontal — full width -->
+    <div class="logos-grid" style="margin-bottom:40px;">
+      <div class="logo-card logo-card-wide">
+        <div class="logo-preview logo-preview-wide bg-dark">
+          <img src="../../assets/logos/wordmark-horizontal.svg" alt="at DISRUPT — Wordmark horizontal" style="filter:invert(1); max-width:480px;">
+        </div>
+        <div class="logo-card-meta">
+          <div class="logo-card-name">Wordmark Horizontal — at DISRUPT</div>
+          <div class="logo-card-desc">Logotipo tipográfico principal con flor integrada. Incluye el símbolo "d" construido a partir de la figura de la flor. Uso: cabeceras, firmas de post, elementos de identidad editorial.</div>
+          <div class="logo-card-meta-row">
+            <span class="logo-badge svg">SVG Vectorial</span>
+            <span class="logo-badge dark-use">Fondo Oscuro</span>
+            <span class="logo-badge light-use">Fondo Claro (invertir)</span>
+            <a href="../../assets/logos/wordmark-horizontal.svg" download class="logo-download-btn">↓ Descargar SVG</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Logos completos (con fondo) -->
+    <div style="margin-bottom:16px;font-size:13px;font-weight:700;color:rgba(255,255,255,0.5);letter-spacing:0.05em;text-transform:uppercase;">Aplicaciones completas de marca</div>
+    <div class="logos-grid" style="margin-bottom:48px;">
+
+      <div class="logo-card">
+        <div class="logo-preview bg-light">
+          <img src="../../assets/logos/logo-light-bg.svg" alt="Logo sobre fondo claro">
+        </div>
+        <div class="logo-card-meta">
+          <div class="logo-card-name">Aplicación — Fondo Claro</div>
+          <div class="logo-card-desc">Logo completo sobre fondo off-white (#F0EFED). Sistema editorial, posts light mode, materiales impresos.</div>
+          <div class="logo-card-meta-row">
+            <span class="logo-badge svg">SVG</span>
+            <span class="logo-badge light-use">Fondo Claro</span>
+            <a href="../../assets/logos/logo-light-bg.svg" download class="logo-download-btn">↓ SVG</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="logo-card">
+        <div class="logo-preview bg-dark">
+          <img src="../../assets/logos/logo-dark-bg.svg" alt="Logo sobre fondo oscuro">
+        </div>
+        <div class="logo-card-meta">
+          <div class="logo-card-name">Aplicación — Fondo Oscuro</div>
+          <div class="logo-card-desc">Logo completo sobre negro profundo (#0A0A0A). Posts dark mode, pantallas, redes sociales en modo oscuro.</div>
+          <div class="logo-card-meta-row">
+            <span class="logo-badge svg">SVG</span>
+            <span class="logo-badge dark-use">Fondo Oscuro</span>
+            <a href="../../assets/logos/logo-dark-bg.svg" download class="logo-download-btn">↓ SVG</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="logo-card">
+        <div class="logo-preview bg-checker">
+          <img src="../../assets/logos/logo-flower-full.svg" alt="Aplicación completa de marca">
+        </div>
+        <div class="logo-card-meta">
+          <div class="logo-card-name">Aplicación Completa — Portfolio</div>
+          <div class="logo-card-desc">Hoja de identidad completa. Muestra múltiples variantes y aplicaciones del sistema de marca sobre diferentes fondos.</div>
+          <div class="logo-card-meta-row">
+            <span class="logo-badge svg">SVG</span>
+            <span class="logo-badge icon-only">Sistema Completo</span>
+            <a href="../../assets/logos/logo-flower-full.svg" download class="logo-download-btn">↓ SVG</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Iconos de la flor -->
+    <div style="margin-bottom:16px;font-size:13px;font-weight:700;color:rgba(255,255,255,0.5);letter-spacing:0.05em;text-transform:uppercase;">Ícono — Flor DISRUPT · Variantes cromáticas</div>
+    <div class="flower-icons-row">
+
+      <div class="flower-icon-card">
+        <div class="flower-icon-preview bg-white">
+          <img src="../../assets/logos/flower-icon-blue.svg" alt="Flor Azul">
+        </div>
+        <div class="flower-icon-meta">
+          <div class="flower-icon-name">Flor — Azul</div>
+          <div class="flower-icon-hex">#2B6FD4 · #7BBFF7</div>
+        </div>
+      </div>
+
+      <div class="flower-icon-card">
+        <div class="flower-icon-preview bg-white">
+          <img src="../../assets/logos/flower-icon-pink.svg" alt="Flor Rosa">
+        </div>
+        <div class="flower-icon-meta">
+          <div class="flower-icon-name">Flor — Rosa</div>
+          <div class="flower-icon-hex">#E8687A · #F7A8A8</div>
+        </div>
+      </div>
+
+      <div class="flower-icon-card">
+        <div class="flower-icon-preview bg-white">
+          <img src="../../assets/logos/flower-icon-violet.svg" alt="Flor Violeta">
+        </div>
+        <div class="flower-icon-meta">
+          <div class="flower-icon-name">Flor — Violeta</div>
+          <div class="flower-icon-hex">#9B78E8 · #C4B0F7</div>
+        </div>
+      </div>
+
+      <div class="flower-icon-card">
+        <div class="flower-icon-preview bg-white">
+          <img src="../../assets/logos/flower-icon-green.svg" alt="Flor Verde">
+        </div>
+        <div class="flower-icon-meta">
+          <div class="flower-icon-name">Flor — Verde</div>
+          <div class="flower-icon-hex">#3EC96B · #85E89C</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Reglas de uso -->
+    <div class="usage-rules">
+      <div class="usage-card">
+        <div class="usage-card-title">✓ Uso correcto del Wordmark</div>
+        <ul>
+          <li>La flor siempre acompaña al wordmark — nunca sola en posts</li>
+          <li>En dark mode: filter: invert(1) sobre el SVG blanco</li>
+          <li>En light mode: usar el SVG directamente</li>
+          <li>Mínimo 80px de ancho para garantizar legibilidad</li>
+          <li>Siempre en esquina superior derecha de los posts</li>
+        </ul>
+      </div>
+      <div class="usage-card">
+        <div class="usage-card-title">✓ Uso del Ícono Flor</div>
+        <ul>
+          <li>Escalable al infinito sin pérdida de calidad (SVG)</li>
+          <li>Usar variante cromática que corresponda a la paleta del post</li>
+          <li>La flor se escala al 60–80% del alto del wordmark</li>
+          <li>En posts de color: sticker blanco opaco con sombra</li>
+          <li>Radio de recorte recomendado: 20% del tamaño</li>
+        </ul>
+      </div>
+      <div class="usage-card">
+        <div class="usage-card-title">⚠ Restricciones</div>
+        <ul>
+          <li>No distorsionar las proporciones del logotipo</li>
+          <li>No aplicar efectos adicionales (sombras, stroke extra)</li>
+          <li>No usar el ícono flor sin el wordmark en comunicaciones de marca</li>
+          <li>No cambiar los colores de la flor — usar las variantes SVG oficiales</li>
+          <li>Zona de exclusión mínima: 16px alrededor del logo</li>
+        </ul>
+      </div>
+      <div class="usage-card">
+        <div class="usage-card-title">📐 Archivo SVG — Especificaciones técnicas</div>
+        <ul>
+          <li>Wordmark: viewBox 633.44 × 152.99 (ratio 4.14:1)</li>
+          <li>Flor ícono: viewBox 306 × 306 (cuadrado perfecto)</li>
+          <li>Aplicaciones completas: viewBox 612 × 792 (US Letter)</li>
+          <li>Compatibles con: Figma, Illustrator, Sketch, web (img/inline)</li>
+          <li>Sin fuentes embebidas — paths puros escalables</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <!-- ══ POST BUILDER ═══════════════════════════════════════════ -->
 <div id="section-builder" style="display:none;">
   <div class="section-wrap">
     <div class="section-head">
       <div class="section-title">Post Builder</div>
-      <div class="section-count">Interactivo</div>
+      <div class="section-count">Interactivo · con Logo SVG real</div>
     </div>
     <div class="builder-wrap">
 
@@ -292,7 +629,13 @@
 
           <div class="post-header-bar" id="postHeaderBar">
             <span class="post-header-label" id="postHeaderLabel">Agency</span>
-            <span class="post-header-logo"><span class="at">at </span>DISRUPT</span>
+            <!-- SVG logo en el post builder -->
+            <img src="../../assets/logos/wordmark-horizontal.svg"
+                 alt="at DISRUPT"
+                 class="post-header-svg"
+                 id="postLogoSvg"
+                 onerror="this.style.display='none';document.getElementById('postLogoFallback').style.display='inline';">
+            <span class="post-header-logo" id="postLogoFallback" style="display:none;"><span class="at">at </span>DISRUPT</span>
           </div>
 
           <div class="post-content">
@@ -304,7 +647,7 @@
             Your Headline<br>Goes Here
           </div>
         </div>
-        <div style="text-align:center;margin-top:12px;font-size:11px;color:rgba(255,255,255,0.2);">Preview no-scale · 4:5 ratio</div>
+        <div style="text-align:center;margin-top:12px;font-size:11px;color:rgba(255,255,255,0.2);">Preview no-scale · 4:5 ratio · Logo SVG real</div>
       </div>
 
       <!-- Controls -->
@@ -434,12 +777,37 @@ Goes Here</textarea>
       </div>
 
       <div class="control-group">
-        <div class="ctrl-label">Wordmark Rules</div>
+        <div class="ctrl-label">Wordmark Rules (SVG)</div>
         <div style="font-size:13px;color:rgba(255,255,255,0.6);line-height:2.2;">
-          "at": <strong>10–11px · Weight 500</strong><br>
-          "DISRUPT": <strong>13–28px · Weight 900</strong><br>
-          Always: <strong>top-right, above separator</strong><br>
-          Dark bg: <strong>white text</strong>
+          Archivo: <strong>wordmark-horizontal.svg</strong><br>
+          ViewBox: <strong>633.44 × 152.99</strong><br>
+          Uso: <strong>top-right, above separator</strong><br>
+          Dark bg: <strong>filter: invert(1)</strong>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <div class="ctrl-label">Assets SVG disponibles</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.5);line-height:2;font-family:monospace;">
+          wordmark-horizontal.svg<br>
+          logo-light-bg.svg<br>
+          logo-dark-bg.svg<br>
+          logo-flower-full.svg<br>
+          flower-icon-blue.svg<br>
+          flower-icon-pink.svg<br>
+          flower-icon-violet.svg<br>
+          flower-icon-green.svg
+        </div>
+      </div>
+
+      <div class="control-group">
+        <div class="ctrl-label">Ruta de acceso</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.5);line-height:2;font-family:monospace;">
+          assets/logos/<br>
+          → Desde ui_kits/social_media/:<br>
+          ../../assets/logos/[archivo].svg<br><br>
+          → Desde raíz del proyecto:<br>
+          assets/logos/[archivo].svg
         </div>
       </div>
 
@@ -448,7 +816,7 @@ Goes Here</textarea>
 </div>
 
 <footer class="footer">
-  at DISRUPT Social Media UI Kit · Design System v1.0 · 2026 · Generado por Antigravity IDE
+  at DISRUPT Social Media UI Kit · Design System v2.0 · 2026 · Logos SVG integrados · Generado por Antigravity IDE
 </footer>
 
 <script>
@@ -548,12 +916,14 @@ function filterTemplates(cat, btn) {
 }
 
 /* ── SECTION SWITCHING ── */
+const SECTIONS = ['templates','logos','builder','formats','specs'];
 function showSection(id) {
-  ['templates','builder','formats','specs'].forEach(s => {
+  SECTIONS.forEach(s => {
     document.getElementById('section-' + s).style.display = s === id ? '' : 'none';
   });
-  document.querySelectorAll('.nav-tab').forEach((t,i) => {
-    t.classList.toggle('active', ['templates','builder','formats','specs'][i] === id);
+  document.querySelectorAll('.nav-tab').forEach(t => {
+    const sid = t.id.replace('tab-','');
+    t.classList.toggle('active', sid === id);
   });
   if (id === 'templates') renderTemplates('all');
 }
@@ -566,12 +936,13 @@ const palettes = {
     blobBR: 'rgba(43,111,212,0.4)',
     glass: 'rgba(255,255,255,0.55)',
     glassBorder: 'rgba(255,255,255,0.4)',
-    tagline: 'rgba(255,255,255,0.7)',
+    tagline: 'rgba(120,80,60,0.7)',
     taglineBg: 'rgba(255,255,255,0.35)',
     taglineBorder: 'rgba(255,255,255,0.3)',
     headerColor: '#1a1a1a',
     headerBorder: 'rgba(0,0,0,0.12)',
     headlineColor: '#1a1a1a',
+    logoFilter: 'none',   /* negro sobre fondo claro */
     tokens: '--bg-off-white\n--blue-500 · --blue-300\n--glass-bg · --radius-xl\n--shadow-md'
   },
   pink: {
@@ -586,6 +957,7 @@ const palettes = {
     headerColor: '#1a1a1a',
     headerBorder: 'rgba(0,0,0,0.10)',
     headlineColor: '#1a1a1a',
+    logoFilter: 'none',
     tokens: '--pink-300 · --pink-500\n--bg-white\n--glass-bg · --radius-xl\n--shadow-sm'
   },
   violet: {
@@ -600,6 +972,7 @@ const palettes = {
     headerColor: '#1a1a1a',
     headerBorder: 'rgba(0,0,0,0.10)',
     headlineColor: '#1a1a1a',
+    logoFilter: 'none',
     tokens: '--purple-300 · --purple-500\n--bg-white\n--glass-bg · --radius-xl\n--shadow-sm'
   },
   green: {
@@ -614,6 +987,7 @@ const palettes = {
     headerColor: '#1a1a1a',
     headerBorder: 'rgba(0,0,0,0.10)',
     headlineColor: '#1a1a1a',
+    logoFilter: 'none',
     tokens: '--green-300 · --green-500\n--bg-white\n--glass-bg · --radius-xl\n--shadow-sm'
   },
   dark: {
@@ -628,6 +1002,7 @@ const palettes = {
     headerColor: '#FFFFFF',
     headerBorder: 'rgba(255,255,255,0.15)',
     headlineColor: '#FFFFFF',
+    logoFilter: 'invert(1)',  /* blanco sobre fondo oscuro */
     tokens: '--bg-black · --blue-300\n--glass-bg-dark\n--radius-xl\n--shadow-xl'
   }
 };
@@ -637,7 +1012,6 @@ let currentStyle = 'glass';
 
 function applyPalette(key) {
   const p = palettes[key];
-  const canvas = document.getElementById('postCanvas');
   document.getElementById('postBg').style.background = p.bg;
   document.getElementById('blobTL').style.background = p.blobTL;
   document.getElementById('blobBR').style.background = p.blobBR;
@@ -645,6 +1019,9 @@ function applyPalette(key) {
   document.getElementById('postHeaderLabel').style.color = p.headerColor;
   document.getElementById('postHeadline').style.color = p.headlineColor;
   document.getElementById('tokenDisplay').textContent = p.tokens;
+  // Update SVG logo filter for dark/light mode
+  const logoSvg = document.getElementById('postLogoSvg');
+  if (logoSvg) logoSvg.style.filter = p.logoFilter;
   applyStyle(currentStyle, p);
 }
 
@@ -666,6 +1043,7 @@ function applyStyle(style, p) {
     frame.style.backdropFilter = 'none';
     frame.style.border = 'none';
     frame.style.boxShadow = 'none';
+    tagline.style.display = 'block';
     tagline.style.background = 'transparent';
     tagline.style.border = 'none';
     tagline.style.color = p.tagline;
